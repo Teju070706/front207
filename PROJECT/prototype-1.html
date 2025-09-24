@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduWebinar - Educational Webinars & Workshops</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #ee43aa;
+            --secondary: #760ca3;
+            --accent: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+            --gray: #6c757d;
+            --pink: #ec4899;
+            --pink-light: #fbcfe8;
+            --purple: #a855f7;
+            --purple-dark: #7e22ce;
+            --white: #ffffff;
+            --border: #e9d5ff;
+            --text: #4c1d95;
+        }
+
+        body {
+            background-color: #f5f7fb;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .logo i {
+            color: var(--accent);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 8px 20px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #d32680;
+            transform: translateY(-2px);
+        }
+
+        .btn-zoom {
+            background: #2D8CFF;
+            color: white;
+            display: inline-block;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .btn-zoom:hover {
+            background: #1c6fd6;
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        .hero {
+            padding: 80px 0;
+            background: linear-gradient(rgba(235, 67, 238, 0.9), rgba(130, 12, 163, 0.9)), url('https://images.unsplash.com/photo-1584697964358-3e14ca57658b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--secondary);
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--light);
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+
+        /* Webinars Section */
+        .webinars {
+            padding: 80px 0;
+            background: #f5f7fb;
+        }
+
+        .webinar-filters {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 20px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .webinar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .webinar-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .webinar-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .webinar-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .webinar-content {
+            padding: 20px;
+        }
+
+        .webinar-date {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .webinar-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .webinar-desc {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+
+        .webinar-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .webinar-footer .btn {
+            padding: 6px 15px;
+            font-size: 0.9rem;
+        }
+
+        /* Registration Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 500px;
+            padding: 30px;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        .modal-title {
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        /* Success Modal */
+        .success-modal-content {
+            text-align: center;
+            padding: 40px 30px;
+        }
+
+        .success-icon {
+            font-size: 60px;
+            color: var(--success);
+            margin-bottom: 20px;
+        }
+
+        /* Login Modal */
+        .login-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-container {
+            display: flex;
+            width: 100%;
+            max-width: 900px;
+            min-height: 500px;
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-left {
+            flex: 1;
+            background: linear-gradient(135deg, var(--purple), var(--pink));
+            color: white;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .login-left h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .login-left p {
+            margin-bottom: 30px;
+            line-height: 1.6;
+            max-width: 300px;
+        }
+
+        .login-left-img {
+            width: 100%;
+            max-width: 250px;
+            margin-top: 20px;
+        }
+
+        .login-right {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-header h1 {
+            font-size: 32px;
+            color: var(--purple-dark);
+            margin-bottom: 10px;
+        }
+
+        .login-header p {
+            color: var(--purple);
+        }
+
+        .login-form {
+            width: 100%;
+        }
+
+        .input-with-icon {
+            position: relative;
+        }
+
+        .input-with-icon i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--purple);
+        }
+
+        .input-with-icon input {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .input-with-icon input:focus {
+            border-color: var(--purple);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.2);
+        }
+
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .remember {
+            display: flex;
+            align-items: center;
+        }
+
+        .remember input {
+            margin-right: 8px;
+            accent-color: var(--purple);
+        }
+
+        .forgot-password {
+            color: var(--purple);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(to right, var(--purple), var(--pink));
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .login-btn:hover {
+            background: linear-gradient(to right, var(--purple-dark), #db2777);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(168, 85, 247, 0.4);
+        }
+
+        .separator {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 25px 0;
+            color: var(--purple);
+        }
+
+        .separator::before,
+        .separator::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .separator::before {
+            margin-right: 10px;
+        }
+
+        .separator::after {
+            margin-left: 10px;
+        }
+
+        .social-login {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .social-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--light);
+            border: 2px solid var(--border);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(168, 85, 247, 0.2);
+        }
+
+        .fa-google {
+            color: #DB4437;
+        }
+
+        .fa-facebook-f {
+            color: #4267B2;
+        }
+
+        .fa-twitter {
+            color: #1DA1F2;
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .signup-link a {
+            color: var(--purple);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+        .close-login-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: var(--accent);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--accent);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .login-container {
+                flex-direction: column;
+                max-width: 400px;
+            }
+
+            .login-left {
+                padding: 30px;
+            }
+
+            .login-left h2 {
+                font-size: 24px;
+            }
+
+            .login-left-img {
+                max-width: 180px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>EduWebinar</span>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="C:\Front207\Untitled-2.html">Webinars&Workshops</a></li>
+                        <li><a href="C:\Front207\Untitled-4.html">Admin Dashboard</a></li>
+                        <li><a href="C:\Front207\Untitled-5.html">User Dashboard</a></li>
+                        <li><a href="C:\Front207\Untitled-6.html">Resources</a></li>
+                        <li><a href="C:\Front207\Untitled-1.html">Testimonials</a></li>
+                        <li><a href="C:\Front207\Untitled-3.html">About us</a></li>
+                    </ul>
+                </nav>
+                <div class="auth-buttons">
+                    <button class="btn btn-outline" onclick="openLoginModal()">Login/Register</button>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section class="hero">
+        <div class="container">
+            <h1>Expand Your Knowledge with Expert-Led Webinars</h1>
+            <p>Join interactive educational webinars and workshops from industry professionals. Learn,engage,and
+                grow with our online learning community.</p>
+            <button class="btn btn-primary">Explore Upcoming Webinars</button>
+        </div>
+    </section>
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Choose EduWebinar?</h2>
+                <p>We provide everything you need for effective online learning and professional development</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card"><i class="fas fa-video"></i>
+                    <h3>Live Interactive Sessions</h3>
+                    <p>Engage with experts in real-time with Q&A and interactive polls during live sessions.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-download"></i>
+                    <h3>Resource Library</h3>
+                    <p>Access presentations,workbooks,and recordings after each session for continued learning.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-certificate"></i>
+                    <h3>Certification</h3>
+                    <p>Earn certificates of completion to showcase your professional development achievements.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</html>
+
+<!-- Login Modal -->
+<div class="login-modal" id="loginModal">
+    <div class="login-container">
+        <span class="close-login-modal" onclick="closeLoginModal()">&times;</span>
+        <div class="login-left">
+            <h2>Welcome to EduWebinar</h2>
+            <p>Join thousands of professionals expanding their knowledge through our educational webinars and
+                workshops.</p>
+            <svg class="login-left-img" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#fff" d="M250,400c83,0,150-67,150-150S333,100,250,100S100,167,100,250S167,400,250,400z" />
+                <circle fill="#7e22ce" cx="250" cy="250" r="120" />
+                <circle fill="#fbcfe8" cx="250" cy="250" r="80" />
+                <path fill="#ec4899"
+                    d="M250,180c-38.7,0-70,31.3-70,70c0,38.7,31.3,70,70,70c38.7,0,70-31.3,70-70C320,211.3,288.7,180,250,180z" />
+            </svg>
+        </div>
+
+        <div class="login-right">
+            <div class="login-header">
+                <h1>Sign In</h1>
+                <p>Access your EduWebinar account</p>
+            </div>
+
+            <form class="login-form" id="eduLoginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email Address</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="loginEmail" placeholder="Enter your email" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                    </div>
+                </div>
+
+                <div class="remember-forgot">
+                    <div class="remember">
+                        <input type="checkbox" id="remember">
+                        <label for="remember">Remember me</label>
+                    </div>
+                    <a href="#" class="forgot-password">Forgot Password?</a>
+                </div>
+
+                <button type="submit" class="login-btn">Sign In</button>
+            </form>
+
+            <div class="separator">Or continue with</div>
+
+            <div class="social-login">
+                <div class="social-btn">
+                    <i class="fab fa-google fa-lg"></i>
+                </div>
+                <div class="social-btn">
+                    <i class="fab fa-facebook-f fa-lg"></i>
+                </div>
+                <div class="social-btn">
+                    <i class="fab fa-twitter fa-lg"></i>
+                </div>
+            </div>
+
+            <div class="signup-link">
+                Don't have an account? <a href="#" onclick="closeLoginModal(); openModal();">Sign up here</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>EduWebinar</h3>
+                <p>Providing high-quality educational webinars and workshops to help professionals grow their
+                    skills and advance their careers.</p>
+                <div class="social-links"><a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li>
+                        <a href="#">Home</a>
+                    </li>
+                    <li>
+                        <a href="#">Webinars&Workshops</a>
+                    </li>
+                    <li><a href="#">Upcoming Webinars</a></li>
+                    <li>
+                        <a href="#">Workshop Calendar</a>
+                    </li>
+                    <li><a href="#">Resource Library</a></li>
+                    <li><a href="#">Become a Presenter</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Resources</h3>
+                <ul>
+                    <li>
+                        <a href="#">Blog</a>
+                    </li>
+                    <li><a href="#">Learning Guides</a></li>
+                    <li><a href="#">Certification</a></li>
+                    <li>
+                        <a href="#">FAQ</a>
+                    </li>
+                    <li><a href="#">Support Center</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <ul>
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        support@eduwebinar.com
+                    </li>
+                    <li>
+                        <i class="fas fa-phone"></i>+1 (555) 123-4567
+                    </li>
+                    <li><i class="fas fa-map-marker-alt"></i>123 Education St, Learn City</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy;2023 EduWebinar. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+<script>
+    const modal = document.getElementById('registrationModal');
+    const loginModal = document.getElementById('loginModal');
+    const successModal = document.getElementById('successModal');
+
+    function openModal() {
+        modal.style.display = 'flex';
+    }
+
+    function closeModal() {
+        modal.style.display = 'none';
+    }
+
+    function openSuccessModal() {
+        successModal.style.display = 'flex';
+    }
+
+    function closeSuccessModal() {
+        successModal.style.display = 'none';
+    }
+
+    function openLoginModal() {
+        loginModal.style.display = 'flex';
+    }
+
+    function closeLoginModal() {
+        loginModal.style.display = 'none';
+    }
+
+    // Close modal when clicking outside of it
+    window.onclick = function (event) {
+        if (event.target === modal) {
+            closeModal();
+        }
+        if (event.target === loginModal) {
+            closeLoginModal();
+        }
+        if (event.target === successModal) {
+            closeSuccessModal();
+        }
+    }
+
+    // Form submission
+    document.getElementById('registrationForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        closeModal();
+        openSuccessModal();
+    });
+
+    // Login form submission
+    document.getElementById('eduLoginForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
+
+        // Simple validation
+        if (!email || !password) {
+            alert('Please fill in all fields');
+            return;
+        }
+
+        // Simulate login process
+        const loginBtn = document.querySelector('.login-btn');
+        loginBtn.textContent = 'Signing in...';
+        loginBtn.disabled = true;
+
+        setTimeout(function () {
+            alert('Login successful! Redirecting to dashboard...');
+            loginBtn.textContent = 'Sign In';
+            loginBtn.disabled = false;
+            closeLoginModal();
+            // In a real application, you would redirect to the dashboard here
+            // window.location.href = 'dashboard.html';
+        }, 1500);
+    });
+
+    // Filter buttons
+    const filterButtons = document.querySelectorAll('.filter-btn');
+
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+
+    // Add hover effects to social buttons
+    const socialBtns = document.querySelectorAll('.social-btn');
+    socialBtns.forEach(btn => {
+        btn.addEventListener('mouseenter', function () {
+            this.style.transform = 'translateY(-3px)';
+            this.style.boxShadow = '0 5px 15px rgba(168, 85, 247, 0.3)';
+        });
+
+        btn.addEventListener('mouseleave', function () {
+            this.style.transform = 'translateY(0)';
+            this.style.boxShadow = 'none';
+        });
+    });
+</script>
+</body>
+
+</html>

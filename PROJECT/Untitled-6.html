@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduWeb - Your Educational Resource Finder</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #ee43af;
+            --primary-dark: #d43abd;
+            --secondary: #7209b7;
+            --accent: #f04cda;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --success: #de4ac0;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --border-radius: 12px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fb 0%, #e3e9f7 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .logo i {
+            font-size: 42px;
+            color: var(--primary);
+            margin-right: 15px;
+        }
+
+        .logo h1 {
+            font-size: 36px;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tagline {
+            font-size: 18px;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .main-content {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+        }
+
+        .chat-container {
+            flex: 1;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 600px;
+        }
+
+        .chat-header {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .chat-header i {
+            font-size: 24px;
+            margin-right: 15px;
+        }
+
+        .chat-header h2 {
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            position: relative;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .bot-message {
+            align-self: flex-start;
+            background-color: var(--light-gray);
+            border-top-left-radius: 0;
+        }
+
+        .user-message {
+            align-self: flex-end;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            color: white;
+            border-top-right-radius: 0;
+        }
+
+        .message-time {
+            font-size: 12px;
+            opacity: 0.7;
+            margin-top: 5px;
+            text-align: right;
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 20px;
+            border-top: 1px solid var(--light-gray);
+            background: white;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid var(--light-gray);
+            border-radius: 30px;
+            font-size: 16px;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .chat-input input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+
+        .chat-input button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            margin-left: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chat-input button:hover {
+            background: var(--primary-dark);
+            transform: scale(1.05);
+        }
+
+        .resources-panel {
+            width: 350px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @media (max-width: 768px) {
+            .resources-panel {
+                width: 100%;
+                height: 400px;
+            }
+        }
+
+        .resources-header {
+            background: linear-gradient(90deg, var(--accent), var(--success));
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .resources-header i {
+            font-size: 24px;
+            margin-right: 15px;
+        }
+
+        .resources-header h2 {
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        .resources-content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .resource-category {
+            margin-bottom: 25px;
+        }
+
+        .resource-category h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--light-gray);
+            color: var(--primary);
+        }
+
+        .resource-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            margin-bottom: 10px;
+            background: var(--light);
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .resource-item:hover {
+            background: var(--light-gray);
+            transform: translateX(5px);
+        }
+
+        .resource-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 18px;
+        }
+
+        .resource-info h4 {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .resource-info p {
+            font-size: 14px;
+            color: var(--gray);
+        }
+
+        .suggested-topics {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 30px;
+            justify-content: center;
+        }
+
+        .topic-chip {
+            background: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            box-shadow: var(--box-shadow);
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .topic-chip:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        .typing-indicator {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            background: var(--light-gray);
+            border-radius: var(--border-radius);
+            width: fit-content;
+            margin-bottom: 15px;
+        }
+
+        .typing-dots {
+            display: flex;
+            margin-left: 10px;
+        }
+
+        .typing-dots span {
+            height: 8px;
+            width: 8px;
+            background: var(--gray);
+            border-radius: 50%;
+            margin: 0 2px;
+            animation: typing 1.4s infinite ease-in-out;
+        }
+
+        .typing-dots span:nth-child(1) {
+            animation-delay: -0.32s;
+        }
+
+        .typing-dots span:nth-child(2) {
+            animation-delay: -0.16s;
+        }
+
+        @keyframes typing {
+
+            0%,
+            80%,
+            100% {
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+
+            40% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .resource-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 5px;
+        }
+
+        .resource-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-robot"></i>
+                <h1>EduWeb</h1>
+            </div>
+            <p class="tagline">Your AI-powered educational resource finder. Ask me anything about any topic!</p>
+        </header>
+
+        <div class="main-content">
+            <div class="chat-container">
+                <div class="chat-header">
+                    <i class="fas fa-comment-dots"></i>
+                    <h2>Chat with EduWeb</h2>
+                </div>
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message bot-message">
+                        <p>Hello! I'm EduWeb, your educational resource assistant. I can help you find learning
+                            materials on any topic. What would you like to learn about today?</p>
+                        <div class="message-time">Just now</div>
+                    </div>
+                </div>
+                <div class="chat-input">
+                    <input type="text" id="userInput"
+                        placeholder="Ask about any topic (e.g., machine learning, history of Rome, Python programming...)">
+                    <button id="sendButton">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="resources-panel">
+                <div class="resources-header">
+                    <i class="fas fa-book-open"></i>
+                    <h2>Recommended Resources</h2>
+                </div>
+                <div class="resources-content" id="resourcesContent">
+                    <div class="resource-category">
+                        <h3>Popular Topics</h3>
+                        <div class="resource-item">
+                            <div class="resource-icon">
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                            <div class="resource-info">
+                                <h4>Web Development</h4>
+                                <p>HTML, CSS, JavaScript tutorials</p>
+                            </div>
+                        </div>
+                        <div class="resource-item">
+                            <div class="resource-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="resource-info">
+                                <h4>Data Science</h4>
+                                <p>Python, statistics, machine learning</p>
+                            </div>
+                        </div>
+                        <div class="resource-item">
+                            <div class="resource-icon">
+                                <i class="fas fa-paint-brush"></i>
+                            </div>
+                            <div class="resource-info">
+                                <h4>Graphic Design</h4>
+                                <p>UI/UX, Adobe tools, design principles</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="resource-category">
+                        <h3>Quick Links</h3>
+                        <div class="resource-item">
+                            <div class="resource-icon">
+                                <i class="fas fa-video"></i>
+                            </div>
+                            <div class="resource-info">
+                                <h4>Video Courses</h4>
+                                <p>Access our library of video tutorials</p>
+                            </div>
+                        </div>
+                        <div class="resource-item">
+                            <div class="resource-icon">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div class="resource-info">
+                                <h4>eBooks & Guides</h4>
+                                <p>Downloadable learning materials</p>
+                            </div>
+                        </div>
+                        <div class="resource-item">
+                            <div class="resource-icon">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                            </div>
+                            <div class="resource-info">
+                                <h4>Live Webinars</h4>
+                                <p>Join upcoming educational sessions</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="suggested-topics">
+            <div class="topic-chip" data-topic="machine learning">Machine Learning</div>
+            <div class="topic-chip" data-topic="ancient history">Ancient History</div>
+            <div class="topic-chip" data-topic="digital marketing">Digital Marketing</div>
+            <div class="topic-chip" data-topic="python programming">Python Programming</div>
+            <div class="topic-chip" data-topic="photography basics">Photography Basics</div>
+            <div class="topic-chip" data-topic="financial literacy">Financial Literacy</div>
+        </div>
+
+        <footer>
+            <p>EduWeb &copy; 2025 - Powered by DeepSeek AI | Your personal educational resource finder</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const chatMessages = document.getElementById('chatMessages');
+            const userInput = document.getElementById('userInput');
+            const sendButton = document.getElementById('sendButton');
+            const resourcesContent = document.getElementById('resourcesContent');
+            const topicChips = document.querySelectorAll('.topic-chip');
+
+            // Sample responses for different topics
+            const topicResponses = {
+                'machine learning': {
+                    message: "Great choice! Machine learning is a fascinating field. Here are some resources to get you started:",
+                    resources: [
+                        { name: "Coursera ML Course", type: "Online Course", link: "#", description: "Andrew Ng's famous machine learning course" },
+                        { name: "Hands-On ML Book", type: "Book", link: "#", description: "Practical guide with Scikit-Learn and TensorFlow" },
+                        { name: "Kaggle Courses", type: "Interactive", link: "#", description: "Free micro-courses on ML fundamentals" }
+                    ]
+                },
+                'ancient history': {
+                    message: "Ancient history is full of fascinating stories! Here are resources to explore:",
+                    resources: [
+                        { name: "The History of Rome Podcast", type: "Audio", link: "#", description: "Comprehensive podcast series" },
+                        { name: "Ancient Civilizations Course", type: "Online Course", link: "#", description: "Yale University's open course" },
+                        { name: "Interactive Timeline", type: "Interactive", link: "#", description: "Visual timeline of ancient empires" }
+                    ]
+                },
+                'digital marketing': {
+                    message: "Digital marketing skills are in high demand! Check out these resources:",
+                    resources: [
+                        { name: "Google Digital Garage", type: "Certification", link: "#", description: "Free courses on digital marketing" },
+                        { name: "HubSpot Academy", type: "Online Courses", link: "#", description: "Inbound marketing certifications" },
+                        { name: "Social Media Examiner", type: "Blog", link: "#", description: "Latest trends and strategies" }
+                    ]
+                },
+                'python programming': {
+                    message: "Python is a great language to learn! Here are some excellent resources:",
+                    resources: [
+                        { name: "Python.org Tutorial", type: "Official Guide", link: "#", description: "Python's official documentation" },
+                        { name: "Automate the Boring Stuff", type: "Book", link: "#", description: "Practical Python projects" },
+                        { name: "Codecademy Python Course", type: "Interactive", link: "#", description: "Hands-on coding exercises" }
+                    ]
+                },
+                'photography basics': {
+                    message: "Photography is both an art and a science! Start with these resources:",
+                    resources: [
+                        { name: "Exposure Guide", type: "Tutorial", link: "#", description: "Understanding aperture, shutter speed, ISO" },
+                        { name: "Digital Photography School", type: "Blog", link: "#", description: "Tips for beginners and pros" },
+                        { name: "Photo Challenges", type: "Practice", link: "#", description: "30-day photography challenges" }
+                    ]
+                },
+                'financial literacy': {
+                    message: "Financial knowledge is power! Here are resources to build your skills:",
+                    resources: [
+                        { name: "Khan Academy Finance", type: "Video Courses", link: "#", description: "Free courses on personal finance" },
+                        { name: "Investopedia", type: "Reference", link: "#", description: "Comprehensive financial dictionary" },
+                        { name: "Budgeting Apps Guide", type: "Tools", link: "#", description: "Best apps for money management" }
+                    ]
+                }
+            };
+
+            // Default response for unknown topics
+            const defaultResponse = {
+                message: "That's an interesting topic! While I'm still learning about it, here are some general educational resources that might help:",
+                resources: [
+                    { name: "Khan Academy", type: "Platform", link: "#", description: "Free courses on many subjects" },
+                    { name: "Coursera", type: "Platform", link: "#", description: "Online courses from top universities" },
+                    { name: "YouTube Edu", type: "Video", link: "#", description: "Educational channels on various topics" }
+                ]
+            };
+
+            // Function to add a message to the chat
+            function addMessage(text, isUser = false) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
+
+                const messageText = document.createElement('p');
+                messageText.innerHTML = text;
+
+                const messageTime = document.createElement('div');
+                messageTime.className = 'message-time';
+                messageTime.textContent = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+                messageDiv.appendChild(messageText);
+                messageDiv.appendChild(messageTime);
+
+                chatMessages.appendChild(messageDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+
+            // Function to show typing indicator
+            function showTypingIndicator() {
+                const typingDiv = document.createElement('div');
+                typingDiv.className = 'typing-indicator';
+                typingDiv.id = 'typingIndicator';
+
+                const typingText = document.createElement('span');
+                typingText.textContent = 'EduWeb is typing';
+
+                const typingDots = document.createElement('div');
+                typingDots.className = 'typing-dots';
+                typingDots.innerHTML = '<span></span><span></span><span></span>';
+
+                typingDiv.appendChild(typingText);
+                typingDiv.appendChild(typingDots);
+
+                chatMessages.appendChild(typingDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+
+                return typingDiv;
+            }
+
+            // Function to update resources panel
+            function updateResources(resources) {
+                resourcesContent.innerHTML = '';
+
+                const categoryDiv = document.createElement('div');
+                categoryDiv.className = 'resource-category';
+
+                const categoryTitle = document.createElement('h3');
+                categoryTitle.textContent = 'Recommended for you';
+                categoryDiv.appendChild(categoryTitle);
+
+                resources.forEach(resource => {
+                    const resourceItem = document.createElement('div');
+                    resourceItem.className = 'resource-item';
+
+                    const resourceIcon = document.createElement('div');
+                    resourceIcon.className = 'resource-icon';
+                    resourceIcon.innerHTML = '<i class="fas fa-book"></i>';
+
+                    const resourceInfo = document.createElement('div');
+                    resourceInfo.className = 'resource-info';
+
+                    const resourceName = document.createElement('h4');
+                    resourceName.textContent = resource.name;
+
+                    const resourceDesc = document.createElement('p');
+                    resourceDesc.textContent = resource.description;
+
+                    const resourceLink = document.createElement('a');
+                    resourceLink.className = 'resource-link';
+                    resourceLink.href = resource.link;
+                    resourceLink.textContent = `Open ${resource.type}`;
+
+                    resourceInfo.appendChild(resourceName);
+                    resourceInfo.appendChild(resourceDesc);
+                    resourceInfo.appendChild(resourceLink);
+
+                    resourceItem.appendChild(resourceIcon);
+                    resourceItem.appendChild(resourceInfo);
+
+                    categoryDiv.appendChild(resourceItem);
+                });
+
+                resourcesContent.appendChild(categoryDiv);
+            }
+
+            // Function to handle user message
+            function handleUserMessage() {
+                const message = userInput.value.trim();
+                if (message === '') return;
+
+                // Add user message to chat
+                addMessage(message, true);
+                userInput.value = '';
+
+                // Show typing indicator
+                const typingIndicator = showTypingIndicator();
+
+                // Simulate AI thinking time
+                setTimeout(() => {
+                    // Remove typing indicator
+                    typingIndicator.remove();
+
+                    // Find matching topic
+                    let response = defaultResponse;
+                    const lowerMessage = message.toLowerCase();
+
+                    for (const [topic, topicResponse] of Object.entries(topicResponses)) {
+                        if (lowerMessage.includes(topic)) {
+                            response = topicResponse;
+                            break;
+                        }
+                    }
+
+                    // Add bot response
+                    addMessage(response.message);
+
+                    // Update resources
+                    updateResources(response.resources);
+                }, 1500);
+            }
+
+            // Event listeners
+            sendButton.addEventListener('click', handleUserMessage);
+
+            userInput.addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    handleUserMessage();
+                }
+            });
+
+            // Add event listeners to topic chips
+            topicChips.forEach(chip => {
+                chip.addEventListener('click', function () {
+                    const topic = this.getAttribute('data-topic');
+                    userInput.value = `I want to learn about ${topic}`;
+                    handleUserMessage();
+                });
+            });
+
+            // Initial bot message with resources
+            setTimeout(() => {
+                const typingIndicator = showTypingIndicator();
+
+                setTimeout(() => {
+                    typingIndicator.remove();
+                    addMessage("Try asking about specific topics like 'machine learning', 'ancient history', or 'python programming'. I'll find the best resources for you!");
+                }, 1000);
+            }, 1000);
+        });
+    </script>
+</body>
+
+</html>

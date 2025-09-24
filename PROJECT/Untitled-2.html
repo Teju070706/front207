@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webinars & Workshops</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #e4287a;
+            --secondary: #c649af;
+            --dark: #2A2A3C;
+            --light: #F8F9FC;
+            --gray: #7B7B8F;
+            --success: #4CAF50;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f7ff;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), #837dff);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(108, 99, 255, 0.2);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        nav ul li a:hover {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(42, 42, 60, 0.8), rgba(42, 42, 60, 0.8)), url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 80px 0;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn:hover {
+            background-color: #5651e5;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(108, 99, 255, 0.25);
+        }
+
+        /* Webinars Section */
+        .webinars {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            color: var(--gray);
+            font-size: 18px;
+        }
+
+        /* Filters */
+        .webinar-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+            gap: 10px;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            background-color: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Webinar Grid */
+        .webinar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .webinar-card {
+            background-color: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        .webinar-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .webinar-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .webinar-content {
+            padding: 25px;
+        }
+
+        .webinar-date {
+            color: var(--primary);
+            font-weight: 500;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .webinar-title {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .webinar-desc {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+
+        .webinar-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .webinar-footer span {
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        .webinar-footer i {
+            margin-right: 5px;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 16px;
+            padding: 30px;
+            width: 100%;
+            max-width: 500px;
+            position: relative;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--gray);
+            transition: var(--transition);
+        }
+
+        .close-modal:hover {
+            color: var(--dark);
+        }
+
+        .modal-title {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: var(--dark);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        /* Success Modal */
+        .success-modal-content {
+            text-align: center;
+            padding: 40px 30px;
+        }
+
+        .success-icon {
+            font-size: 60px;
+            color: var(--success);
+            margin-bottom: 20px;
+        }
+
+        .btn-zoom {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #2D8CFF;
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .btn-zoom:hover {
+            background-color: #1B73E8;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(45, 140, 255, 0.25);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+
+        .footer-column p {
+            margin-bottom: 20px;
+            color: #B8B8C7;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column ul li a {
+            color: #B8B8C7;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-column ul li a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #B8B8C7;
+            font-size: 14px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul {
+                margin-top: 20px;
+            }
+
+            nav ul li {
+                margin: 0 10px;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .webinar-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    LearnHub
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Webinars</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Webinars Section -->
+    <section class="webinars" id="webinars">
+        <div class="container">
+            <div class="section-title">
+                <h2>Upcoming Webinars & Workshops</h2>
+                <p>Browse our scheduled events and register for your spot today</p>
+            </div>
+            <div class="webinar-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="technology">Technology</button>
+                <button class="filter-btn" data-filter="business">Business</button>
+                <button class="filter-btn" data-filter="design">Design</button>
+                <button class="filter-btn" data-filter="education">Education</button>
+            </div>
+            <div class="webinar-grid">
+                <div class="webinar-card" data-category="technology">
+                    <div class="webinar-img"
+                        style="background-image: url('https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80');">
+                    </div>
+                    <div class="webinar-content">
+                        <div class="webinar-date">September 30, 2025 | 2:00 PM EST</div>
+                        <h3 class="webinar-title">Introduction to Web Development</h3>
+                        <p class="webinar-desc">Learn the fundamentals of HTML, CSS, and JavaScript to start your
+                            journey in web development.</p>
+                        <div class="webinar-footer">
+                            <span><i class="fas fa-users"></i> 42 Registered</span>
+                            <button class="btn btn-primary" onclick="openModal()">Join Now</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="webinar-card" data-category="business">
+                    <div class="webinar-img"
+                        style="background-image: url('https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80');">
+                    </div>
+                    <div class="webinar-content">
+                        <div class="webinar-date">October 5, 2025 | 11:00 AM EST</div>
+                        <h3 class="webinar-title">Data Analytics for Business</h3>
+                        <p class="webinar-desc">Discover how to leverage data to make informed business decisions and
+                            drive growth.</p>
+                        <div class="webinar-footer"><span>
+                                <i class="fas fa-users"></i> 28 Registered</span>
+                            <button class="btn btn-primary" onclick="openModal()">Join Now</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="webinar-card" data-category="design">
+                    <div class="webinar-img"
+                        style="background-image: url('https://images.unsplash.com/photo-1545235617-9465d2a55698?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80');">
+                    </div>
+                    <div class="webinar-content">
+                        <div class="webinar-date">October 12, 2025 | 3:30 PM EST</div>
+                        <h3 class="webinar-title">UX Design Principles</h3>
+                        <p class="webinar-desc">Master the core principles of user experience design to create intuitive
+                            digital products.</p>
+                        <div class="webinar-footer">
+                            <span><i class="fas fa-users"></i> 35 Registered</span>
+                            <button class="btn btn-primary" onclick="openModal()">Join Now</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="webinar-card" data-category="education">
+                    <div class="webinar-img"
+                        style="background-image: url('https://images.unsplash.com/photo-1501504905252-473c47e087f8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80');">
+                    </div>
+                    <div class="webinar-content">
+                        <div class="webinar-date">October 18, 2025 | 1:00 PM EST</div>
+                        <h3 class="webinar-title">Modern Teaching Methods</h3>
+                        <p class="webinar-desc">Explore innovative approaches to education that improve student
+                            engagement and learning outcomes.</p>
+                        <div class="webinar-footer">
+                            <span><i class="fas fa-users"></i> 19 Registered</span>
+                            <button class="btn btn-primary" onclick="openModal()">Join Now</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="webinar-card" data-category="technology">
+                    <div class="webinar-img"
+                        style="background-image: url('https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80');">
+                    </div>
+                    <div class="webinar-content">
+                        <div class="webinar-date">October 25, 2025 | 4:00 PM EST</div>
+                        <h3 class="webinar-title">Python for Data Science</h3>
+                        <p class="webinar-desc">Learn how to use Python libraries for data analysis, visualization, and
+                            machine learning.</p>
+                        <div class="webinar-footer">
+                            <span><i class="fas fa-users"></i> 53 Registered</span>
+                            <button class="btn btn-primary" onclick="openModal()">Join Now</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="webinar-card" data-category="business">
+                    <div class="webinar-img"
+                        style="background-image: url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80');">
+                    </div>
+                    <div class="webinar-content">
+                        <div class="webinar-date">November 2, 2025 | 10:00 AM EST</div>
+                        <h3 class="webinar-title">Digital Marketing Strategies</h3>
+                        <p class="webinar-desc">Discover effective digital marketing techniques to grow your business
+                            online.</p>
+                        <div class="webinar-footer">
+                            <span><i class="fas fa-users"></i> 31 Registered</span>
+                            <button class="btn btn-primary" onclick="openModal()">Join Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Modal -->
+    <div class="modal" id="registrationModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h2 class="modal-title">Register for Webinar</h2>
+            <form id="registrationForm">
+                <div class="form-group">
+                    <label for="webinarSelect">Select Webinar</label>
+                    <select id="webinarSelect">
+                        <option>Introduction to Web Development - Sep 30</option>
+                        <option>Data Analytics for Business - Oct 5</option>
+                        <option>UX Design Principles - Oct 12</option>
+                        <option>Modern Teaching Methods - Oct 18</option>
+                        <option>Python for Data Science - Oct 25</option>
+                        <option>Digital Marketing Strategies - Nov 2</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="jobTitle">Job Title</label>
+                    <input type="text" id="jobTitle" placeholder="Enter your job title">
+                </div>
+                <div class="form-group">
+                    <label for="questions">Questions for Presenter</label>
+                    <textarea id="questions" placeholder="Any specific questions you'd like answered?"></textarea>
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">Complete Registration</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Modal with Zoom Link -->
+    <div class="modal" id="successModal">
+        <div class="modal-content success-modal-content">
+            <span class="close-modal" onclick="closeSuccessModal()">&times;</span>
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2 class="modal-title">Registration Successful!</h2>
+            <p>Thank you for registering. You will receive a confirmation email shortly.</p>
+            <p>Click the button below to join the Zoom meeting:</p>
+            <div style="margin-top: 30px;">
+                <a href="https://us05web.zoom.us/j/84606316806?pwd=C6vVyzdC0j98KQQlStLMioQryqe6LS.1" target="_blank"
+                    class="btn-zoom">
+                    <i class="fas fa-video"></i> Join Zoom Meeting
+                </a>
+            </div>
+            <p style="margin-top: 20px; font-size: 14px; color: var(--gray);">
+                Meeting ID: 846 0631 6806 <br>
+                Password: Willsent
+            </p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>About LearnHub</h3>
+                    <p>We provide high-quality webinars and workshops to help professionals expand their knowledge and
+                        skills in various fields.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Upcoming Webinars</a></li>
+                        <li><a href="#">Past Webinars</a></li>
+                        <li><a href="#">Become an Instructor</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Categories</h3>
+                    <ul>
+                        <li><a href="#">Technology</a></li>
+                        <li><a href="#">Business</a></li>
+                        <li><a href="#">Design</a></li>
+                        <li><a href="#">Education</a></li>
+                        <li><a href="#">Marketing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> info@learnhub.com</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Education St, Learning City</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 LearnHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Modal functionality
+        function openModal() {
+            document.getElementById('registrationModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('registrationModal').style.display = 'none';
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('successModal').style.display = 'none';
+        }
+
+        // Form submission
+        document.getElementById('registrationForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            closeModal();
+            document.getElementById('successModal').style.display = 'flex';
+        });
+
+        // Filter functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const webinarCards = document.querySelectorAll('.webinar-card');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+
+                    // Add active class to clicked button
+                    button.classList.add('active');
+
+                    const filterValue = button.getAttribute('data-filter');
+
+                    webinarCards.forEach(card => {
+                        if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // Close modals when clicking outside
+            window.addEventListener('click', function (e) {
+                if (e.target === document.getElementById('registrationModal')) {
+                    closeModal();
+                }
+                if (e.target === document.getElementById('successModal')) {
+                    closeSuccessModal();
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
